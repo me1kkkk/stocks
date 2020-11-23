@@ -1,3 +1,5 @@
+const finnhubToken = 'breeeofrh5rckh45b320';
+
 export const login = async (password: string, username: string) => {
     return await fetch('/login', {
         method: 'POST',
@@ -35,7 +37,33 @@ export const getMe = async (token: string) => {
         headers: { Authorization: 'bearer ' + token },
     }).then(async (response) => {
         const data = await response.json();
-        console.log(data);
+        console.error(data);
         return data;
+    });
+};
+
+export const getQuotes = async (token: string, quote: string) => {
+    return await fetch('/quotes', {
+        method: 'POST',
+        headers: {
+            Authorization: 'bearer ' + token,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            quote,
+        }),
+    });
+};
+
+export const addStock = async (token: string, symbol: string) => {
+    return await fetch('/add', {
+        method: 'POST',
+        headers: {
+            Authorization: 'bearer ' + token,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            symbol,
+        }),
     });
 };
