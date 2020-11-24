@@ -17,3 +17,7 @@ export const LinkContainer = styled.div`
     align-items: center;
     cursor: pointer;
 `;
+
+export const ButtonContainer = styled.div`
+    margin-top: 20px;
+`;

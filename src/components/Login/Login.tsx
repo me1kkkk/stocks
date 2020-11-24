@@ -20,7 +20,7 @@ import {
     Grid,
     Link,
 } from '@material-ui/core';
-import { LinkContainer } from './styled';
+import { LinkContainer, ButtonContainer } from './styled';
 
 interface IState {
     username: string;
@@ -51,15 +51,21 @@ const Login = ({}) => {
         const { isLoading } = state;
         setState({ ...state, isLoading: !isLoading });
         try {
-            await login(username, password).then((res) => {
+            await login(password, username).then((res) => {
                 if (res.status === 200) {
                     res.json().then((data) => {
                         window.localStorage.setItem('token', data.token);
                         const token = window.localStorage.getItem('token');
                         dispatch(actions.setToken(token));
                         history.push('/');
+                        setState({ ...state, isLoading: false });
                     });
                 } else {
+                    res.json().then((data) => {
+                        console.log(data.message);
+                        setError('password', { message: data.message });
+                        setState({ ...state, isLoading: false });
+                    });
                 }
             });
         } catch (e) {
@@ -98,20 +104,15 @@ const Login = ({}) => {
                                 </InputLabel>
                                 <Input
                                     name="username"
-                                    defaultValue=""
                                     type="text"
                                     onChange={handleChange('username')}
                                     fullWidth={true}
                                     error={!!errors.username}
                                     inputRef={register({
-                                        required: true,
-                                        minLength: 2,
+                                        required: 'Benutzername ungültig.',
                                     })}
                                 />
-                                {errors &&
-                                    errors.username?.type === 'required' && (
-                                        <span>This is Required</span>
-                                    )}
+                                {errors && errors.username?.message}
                             </FormControl>
 
                             <FormControl>
@@ -143,23 +144,21 @@ const Login = ({}) => {
                                     fullWidth={true}
                                     error={!!errors.password}
                                     inputRef={register({
-                                        required: true,
-                                        minLength: 2,
+                                        required: 'Passwort ungültig',
                                     })}
                                 />
-                                {errors &&
-                                    errors.password?.type === 'required' && (
-                                        <span>This is Required</span>
-                                    )}
+                                {errors && errors.password?.message}
                             </FormControl>
 
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                            >
-                                Login
-                            </Button>
+                            <ButtonContainer>
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                >
+                                    Login
+                                </Button>
+                            </ButtonContainer>
                         </Form>
                     </FormContainer>
                 </form>

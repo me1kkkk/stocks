@@ -36,10 +36,6 @@ const Home = ({}) => {
         history.push('/login');
     };
 
-    const getToken = () => {
-        console.log(token);
-    };
-
     const getStock = () => {
         getQuotes(token, inputValue).then((res) => {
             if (res.status === 200) {
@@ -65,7 +61,6 @@ const Home = ({}) => {
             <div>Home</div>
             <div>{stock.c}</div>
             <div>
-                <button onClick={getToken}>GetToken</button>
                 <button onClick={handleLogout}>Logout</button>
                 <button onClick={getStock}>Get Stock</button>
                 <input
