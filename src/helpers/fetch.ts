@@ -55,6 +55,19 @@ export const getQuotes = async (token: string, quote: string) => {
     });
 };
 
+export const getCompanyProfile = async (token: string, symbol: string) => {
+    return await fetch('/companyprofile', {
+        method: 'POST',
+        headers: {
+            Authorization: 'bearer ' + token,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            symbol,
+        }),
+    });
+};
+
 export const addStock = async (token: string, symbol: string) => {
     return await fetch('/add', {
         method: 'POST',
@@ -64,6 +77,19 @@ export const addStock = async (token: string, symbol: string) => {
         },
         body: JSON.stringify({
             symbol,
+        }),
+    });
+};
+
+export const getAllStocks = async (token: string) => {
+    return await fetch('/getStocks', {
+        method: 'POST',
+        headers: {
+            Authorization: 'bearer ' + token,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            token,
         }),
     });
 };

@@ -8,3 +8,10 @@ export const asyncLocalStorage = {
         return localStorage.getItem(key);
     },
 };
+
+export const assignBy = (key) => {
+    return (data, item) => {
+        data[item[key]] = item;
+        return data;
+    };
+};

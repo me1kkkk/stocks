@@ -16,7 +16,7 @@ import {
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { useForm, Controller } from 'react-hook-form';
-import { LinkContainer } from '../Login/styled';
+import { LinkContainer, ButtonContainer } from '../Login/styled';
 import { useHistory } from 'react-router-dom';
 
 interface IFormInput {
@@ -185,23 +185,29 @@ const Register = ({}) => {
                                         <span>This is Required</span>
                                     )}
                             </FormControl>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                            >
-                                Register
-                            </Button>
+                            <ButtonContainer>
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    fullWidth={true}
+                                >
+                                    Register
+                                </Button>
+                            </ButtonContainer>
+                            <ButtonContainer>
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={() => history.push('/login')}
+                                    fullWidth={true}
+                                >
+                                    Login
+                                </Button>
+                            </ButtonContainer>
                         </Form>
                     </FormContainer>
                 </form>
-            </Grid>
-            <Grid>
-                <LinkContainer>
-                    <Link onClick={() => history.push('/login')}>
-                        Zurück zu Login
-                    </Link>
-                </LinkContainer>
             </Grid>
         </Container>
     );

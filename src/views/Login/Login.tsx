@@ -155,20 +155,24 @@ const Login = ({}) => {
                                     type="submit"
                                     variant="contained"
                                     color="primary"
+                                    fullWidth={true}
                                 >
                                     Login
+                                </Button>
+                            </ButtonContainer>
+                            <ButtonContainer>
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    fullWidth={true}
+                                    onClick={() => history.push('register')}
+                                >
+                                    Registrieren
                                 </Button>
                             </ButtonContainer>
                         </Form>
                     </FormContainer>
                 </form>
-            </Grid>
-            <Grid>
-                <LinkContainer>
-                    <Link onClick={() => history.push('/register')}>
-                        Registrieren
-                    </Link>
-                </LinkContainer>
             </Grid>
         </Container>
     );
